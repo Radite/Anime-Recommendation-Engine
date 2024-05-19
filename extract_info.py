@@ -14,5 +14,9 @@ def extract_other_info(soup, label):
     span = soup.find('span', class_='dark_text', text=label)
     if span:
         info = [sibling.text.strip() for sibling in span.find_next_siblings() if sibling.name == 'a']
-        return info
+        # Join the list of strings into a single string separated by comma
+        info_string = ', '.join(info)
+        # Remove surrounding brackets and double quotes
+        info_string = info_string.strip('[]"')
+        return info_string
     return None
