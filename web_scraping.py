@@ -10,7 +10,8 @@ def get_info(url):
     # Extract various information
     score = soup.find("span", itemprop="ratingValue").text if soup.find("span", itemprop="ratingValue") else ""
     aired_info = extract_info(soup, "Aired:") if extract_info(soup, "Aired:") else ""
-    aired_year = re.search(r'\d{4}', aired_info).group() if aired_info else ""  # Extracting the year part using regex
+    match = re.search(r'\d{4}', aired_info)
+    aired_year = match.group() if match else ""
     duration = extract_info(soup, "Duration:") if extract_info(soup, "Duration:") else ""
     episodes = extract_info(soup, "Episodes:") if extract_info(soup, "Episodes:") else ""
     rating = extract_info(soup, "Rating:") if extract_info(soup, "Rating:") else ""
