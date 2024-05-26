@@ -22,7 +22,8 @@ def scrape_profile(url):
             # Check if the count is greater than 0
             count_span = completed_count.find_next_sibling('span', class_='di-ib fl-r lh10')
             if count_span:
-                count = int(count_span.text.strip())
+                count_str = count_span.text.strip().replace(',', '')
+                count = int(count_str)
                 if count > 0:
                     print("Anime Completed Count:", count)
                     

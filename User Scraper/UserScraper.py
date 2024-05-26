@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from ScrapeProfile import scrape_profile  # Make sure to replace 'your_module' with the actual module name where scrape_profile is defined
+from ScrapeProfile import scrape_profile 
 import openpyxl
 import os
 import time
@@ -13,7 +13,7 @@ def get_state():
         return int(state[0]), int(state[1]), int(state[2]), int(state[3]), int(state[4]), int(state[5]), int(state[6])
     else:
         # If state file doesn't exist, return default values
-        return 0, 1, 0, 13, 17, 0, 1000
+        return 0, 2, 0, 35, 44, 3, 150
 
 def save_state(page_number, gender, total_count, min_age, max_age, age_index, m):
     state_file = "scraping_state.txt"
@@ -39,6 +39,7 @@ def scrape_profiles():
         if total_count >= m:
             gender = 1 if gender == 2 else 2
             total_count = 0
+            page_number = 0  # Reset page_number to 0 when gender changes
 
             if gender == 1:  # Both genders have been scraped for the current age range
                 age_index += 1
