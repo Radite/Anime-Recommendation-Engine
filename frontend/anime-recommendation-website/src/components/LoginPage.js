@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './LoginPage.css'; // Import CSS file for LoginPage styles
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import '../styles/LoginPage.css'; // Import CSS file for LoginPage styles
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -28,8 +29,14 @@ function LoginPage() {
         <label htmlFor="password">Password:</label>
         <input type="password" id="password" name="password" value={formData.password} onChange={handleInputChange} required />
 
-        <button type="submit" className="login-button">Login</button>
+        <div className="button-container">
+          <button type="submit" className="login-button">Login</button>
+          <Link to="/signup" className="signup-button">Sign Up</Link>
+        </div>
       </form>
+      
+      {/* Forgot Password Link */}
+      <Link to="/forgotpassword" className="forgot-password-link">Forgot Password?</Link>
     </div>
   );
 }

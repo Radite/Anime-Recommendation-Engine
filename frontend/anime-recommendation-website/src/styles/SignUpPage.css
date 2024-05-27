@@ -1,0 +1,51 @@
+/* SignUpPage.css */
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url('../assets/4k-sci-fi-black-hole-wallpaper.avif'); /* Replace with the actual path to your background image */
+  background-size: cover;
+  background-position: center;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 20px;
+  border: 2px solid #fff; /* White border */
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background with some transparency */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
+}
+
+.signup-form label {
+  margin-bottom: 10px;
+  color: #fff; /* White text color */
+}
+
+.signup-form input,
+.signup-form select {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.8); /* Light background color with some transparency */
+}
+
+.signup-button {
+  padding: 12px;
+  background-color: #5f5fff; /* Blueish color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.signup-button:hover {
+  background-color: #3f3fff; /* Darker shade on hover */
+}

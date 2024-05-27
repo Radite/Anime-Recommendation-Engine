@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/SignUpPage.css'; // Import CSS file for SignUpPage styles
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -21,9 +22,9 @@ function SignUpPage() {
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="signup-form" onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input type="text" id="username" name="username" value={formData.username} onChange={handleInputChange} required />
 
@@ -42,7 +43,7 @@ function SignUpPage() {
           <option value="female">Female</option>
         </select>
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="signup-button">Sign Up</button>
       </form>
     </div>
   );

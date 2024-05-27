@@ -1,11 +1,12 @@
 /* LoginPage.css */
+
 .login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url('4k-sci-fi-black-hole-wallpaper.avif'); /* Replace 'path/to/background-image.jpg' with the actual path to your background image */
+    background-image: url('../assets/4k-sci-fi-black-hole-wallpaper.avif'); /* Replace with the actual path to your background image */
     background-size: cover;
     background-position: center;
   }
@@ -34,17 +35,47 @@
     background-color: rgba(255, 255, 255, 0.8); /* Light background color with some transparency */
   }
   
-  .login-button {
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .login-button,
+  .signup-button {
     padding: 12px;
-    background-color: #ff5f5f; /* Reddish anime-like color */
+    width: 48%; /* Adjust width to fit two buttons in one line */
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth color transition on hover */
+    text-align: center; /* Center text inside the buttons */
+    text-decoration: none; /* Remove default link underline for signup button */
+  }
+  
+  .login-button {
+    background-color: #ff5f5f; /* Reddish anime-like color */
   }
   
   .login-button:hover {
     background-color: #ff3f3f; /* Darker shade on hover */
+  }
+  
+  .signup-button {
+    background-color: #5f5fff; /* Blueish color for signup button */
+  }
+  
+  .signup-button:hover {
+    background-color: #3f3fff; /* Darker shade on hover */
+  }
+  
+  .forgot-password-link {
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove default underline */
+    margin-top: 10px; /* Add some margin to separate from buttons */
+  }
+  
+  .forgot-password-link:hover {
+    color: #ccc; /* Light gray color on hover */
   }
   
