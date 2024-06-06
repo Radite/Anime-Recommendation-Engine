@@ -1,0 +1,106 @@
+.anime-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background-image: url('../assets/4k-sci-fi-black-hole-wallpaper.avif');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+}
+
+.anime-list-content {
+  z-index: 1;
+  width: 80%; /* Adjust as needed */
+  max-width: 1200px; /* Limit width for better readability */
+  margin-top: 50px; /* Increase margin from the top */
+  flex-grow: 1; /* Allow this container to grow and take up remaining space */
+  overflow-y: hidden; /* Allow scrolling within this container */
+}
+
+.search-input {
+  padding: 16px 24px;
+  font-size: 16px;
+  background-color: #fff; /* White background */
+  color: #000; /* Black text color */
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  width: 30%; /* Set width */
+  margin: 0 auto; /* Center the search input */
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+  background-repeat: no-repeat;
+  background-position: 10px center; /* Adjust icon position */
+  padding-left: 40px; /* Adjust padding for icon */
+}
+
+.search-input::placeholder {
+  color: #000; /* Placeholder color */
+}
+
+.search-input:hover,
+.search-input:focus {
+  border-color: #388e3c;
+}
+
+.anime-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  min-height: calc(100vh - 150px); /* Adjust as needed, subtracting header and padding */
+}
+
+
+.anime-list-item {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.anime-list-item:hover {
+  color: #388e3c;
+}
+
+.anime-card {
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the card */
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  height: 80px; /* Adjust the height as needed */
+}
+
+
+.anime-card:hover {
+  transform: translateY(-5px);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.alternative-name {
+  font-size: 14px;
+  color: #bbb; /* Lighter color for alternative name */
+  margin-top: 5px;
+}
+
+.anime-list-content h2 {
+  color: #fff; /* White text color */
+  font-size: 24px; /* Adjust font size as needed */
+  margin-bottom: 20px; /* Add some space below the heading */
+}
