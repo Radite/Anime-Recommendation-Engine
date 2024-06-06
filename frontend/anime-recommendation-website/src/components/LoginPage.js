@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate from react-router-dom
+import axios from 'axios'; // Import Axios for making HTTP requests
 import '../styles/LoginPage.css'; // Import CSS file for LoginPage styles
 
 function LoginPage() {
@@ -8,15 +9,26 @@ function LoginPage() {
     password: ''
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add code to submit login data to backend
-    console.log(formData);
+    try {
+      // Send login request to backend
+      const response = await axios.post('http://localhost:3001/api/auth/login', formData);
+      // Store token and navigate to home page or dashboard
+      localStorage.setItem('token', response.data.token);
+      setErrorMessage('');
+      navigate('/recommendation'); // Adjust the path to your home page or dashboard
+    } catch (error) {
+      setErrorMessage(error.response?.data?.message || 'Error during login');
+    }
   };
 
   return (
@@ -35,6 +47,9 @@ function LoginPage() {
         </div>
       </form>
       
+      {/* Error Message Display */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       {/* Forgot Password Link */}
       <Link to="/forgotpassword" className="forgot-password-link">Forgot Password?</Link>
     </div>
