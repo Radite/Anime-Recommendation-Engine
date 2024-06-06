@@ -68,7 +68,15 @@ for index, row in anime_data.iterrows():
             demographic_id = cursor.fetchone()[0]
             cursor.execute("INSERT INTO Anime_Demographics (Anime_ID, Demographic_ID) VALUES (%s, %s)", (anime_id, demographic_id))
 
-
+    # Insert data into Themes table
+    themes = row['Theme'].split(',')
+    for theme in themes:
+        theme = theme.strip()
+        if theme:
+            cursor.execute("INSERT IGNORE INTO Themes (ThemeName) VALUES (%s)", (theme,))
+            cursor.execute("SELECT Theme_ID FROM Themes WHERE ThemeName = %s", (theme,))
+            theme_id = cursor.fetchone()[0]
+            cursor.execute("INSERT INTO Anime_Themes (Anime_ID, Theme_ID) VALUES (%s, %s)", (anime_id, theme_id))
 ''' # Insert data into MySQL database for user data
 for index, row in user_data.iterrows():
     # Insert data into User table
