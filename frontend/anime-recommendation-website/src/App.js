@@ -4,6 +4,9 @@ import LoginPage from './components/LoginPage';
 import SignUpPage from './components/SignUpPage';
 import AnimeListPage from './components/AnimeListPage';
 import RecommendationPage from './components/RecommendationPage';
+import AnimePage from './components/AnimePage';
+import Header from './components/Header';
+import ProfilePage from './components/ProfilePage';
 import './App.css';
 
 function App() {
@@ -17,6 +20,8 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/anime-list" element={<AnimeListPage />} />
           <Route path="/recommendation" element={<RecommendationPage />} />
+          <Route path="/anime/:id" element={<AnimePage />} />
+          <Route path="/profile" element={<ProfilePage />} /> 
           {/* Add more routes as needed */}
         </Routes>
       </BrowserRouter>
