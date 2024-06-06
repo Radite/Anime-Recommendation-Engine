@@ -1,0 +1,72 @@
+.recommendation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url('../assets/4k-sci-fi-black-hole-wallpaper.avif'); /* Replace with the actual path to your background image */
+  background-size: cover;
+  background-position: center;
+  position: relative; /* Position relative for absolute positioning of overlay */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+}
+
+.recommendation-content {
+  z-index: 1; /* Ensure content appears above the overlay */
+}
+
+.search-bar {
+  position: relative;
+}
+
+.suggestion-box {
+  position: absolute;
+  top: calc(100% + 5px); /* Position below the input */
+  left: 0;
+  width: 100%;
+  background-color: #fff; /* White background color */
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow */
+  z-index: 1;
+}
+
+.suggested-anime {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.suggested-anime:hover {
+  background-color: #f0f0f0; /* Light gray background color on hover */
+}
+
+.anime-list {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff; /* White text color */
+  overflow-y: hidden; /* Remove vertical scrollbar */
+  max-height: 300px; /* Limit height to allow scrolling */
+}
+
+.anime-item {
+  margin-bottom: 10px;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin-right: 10px;
+}
+
