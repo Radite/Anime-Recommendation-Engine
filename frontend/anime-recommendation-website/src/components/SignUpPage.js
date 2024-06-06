@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios for making HTTP requests
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import '../styles/SignUpPage.css'; // Import CSS file for SignUpPage styles
 
 function SignUpPage() {
@@ -10,15 +12,29 @@ function SignUpPage() {
     gender: 'male'
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add code to submit form data to backend
-    console.log(formData);
+    try {
+      // Send signup request to backend
+      const response = await axios.post('http://localhost:3001/api/auth/signup', formData);
+      setSuccessMessage('Successfully signed up! Redirecting to login page...');
+      setErrorMessage('');
+      setTimeout(() => {
+        navigate('/login'); // Redirect to login page after a short delay
+      }, 2000);
+    } catch (error) {
+      setErrorMessage(error.response?.data?.message || 'Error during signup');
+      setSuccessMessage('');
+    }
   };
 
   return (
@@ -45,6 +61,9 @@ function SignUpPage() {
 
         <button type="submit" className="signup-button">Sign Up</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
     </div>
   );
 }
