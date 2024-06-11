@@ -19,7 +19,12 @@
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.8",
+    "node-pickle": "^0.0.2",
+    "pickle": "^0.2.0",
+    "picklejs": "^0.101.0",
+    "python-shell": "^5.0.0",
     "sequelize": "^6.37.3",
+    "surprise": "^0.0.4",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
