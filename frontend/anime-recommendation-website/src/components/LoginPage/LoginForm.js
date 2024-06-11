@@ -11,7 +11,12 @@ function LoginForm({ navigate }) {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onInputChange = (e) => handleInputChange(e, formData, setFormData);
+  const onInputChange = (e) => {
+    // Convert the email to lowercase before updating the state
+    const { name, value } = e.target;
+    const lowerCaseValue = name === 'email' ? value.toLowerCase() : value;
+    handleInputChange(e, { ...formData, [name]: lowerCaseValue }, setFormData);
+  };
 
   const onFormSubmit = (e) => handleSubmit(e, formData, setErrorMessage, navigate);
 
