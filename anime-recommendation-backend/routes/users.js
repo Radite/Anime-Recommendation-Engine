@@ -12,5 +12,11 @@ router.get('/anime-scores', verifyToken, UserController.getUserAnimeScores);
 router.post('/user-anime-score', verifyToken, (req, res) => {
     UserController.addUserAnimeScore(req, res);
   });
-  
+
+// Route to update model with scores
+router.post('/updateModelWithScores', UserController.updateModelWithScores);
+
+// Route to delete anime score
+router.delete('/user-anime-score/:userId/:animeId', verifyToken, UserController.deleteAnimeScore);
+
 module.exports = router;

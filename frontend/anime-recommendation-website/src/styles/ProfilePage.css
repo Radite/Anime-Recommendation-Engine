@@ -155,3 +155,18 @@
 .anime-card button:hover {
     background-color: #ffd633;
 }
+/* Style for the Update Recommendation button */
+.update-recommendation-button {
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.update-recommendation-button:hover {
+    background-color: #ffd633;
+}

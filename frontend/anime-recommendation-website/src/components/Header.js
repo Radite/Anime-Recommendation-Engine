@@ -32,7 +32,10 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <Link to="/recommendation">Recommendations </Link>
+            <Link to="/recommendation">Content Recommendations </Link>
+          </li>
+          <li>
+            <Link to="/personalrecommendation">Personal Recommendations </Link>
           </li>
           <li>
             <Link to="/anime-list">Anime Search</Link>
