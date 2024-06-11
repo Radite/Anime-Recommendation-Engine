@@ -1,7 +1,20 @@
 from bs4 import BeautifulSoup
 import requests
-from extract_info import extract_info, extract_other_info
 import re
+
+def extract_info(soup, label):
+    # Function to extract the information from the table
+    element = soup.find("span", string=label)
+    if element and element.find_next_sibling():
+        return element.find_next_sibling().text.strip()
+    return ""
+
+def extract_other_info(soup, label):
+    # Function to extract other information like genres, studios, etc.
+    element = soup.find("span", string=label)
+    if element:
+        return ', '.join([a.text for a in element.find_next_siblings("a")])
+    return ""
 
 def get_info(url):
     anime_page = requests.get(url)
@@ -20,6 +33,10 @@ def get_info(url):
     studios = extract_other_info(soup, 'Studios:') if extract_other_info(soup, 'Studios:') else ""
     demographic = extract_other_info(soup, "Demographic:") if extract_other_info(soup, "Demographic:") else ""
 
+    # Extract alternative title
+    alternative_title = soup.find("p", class_="title-english title-inherit")
+    alternative_title_text = alternative_title.text.strip() if alternative_title else ""
+
     # Format duration
     if duration:
         duration = duration.split()[0]
@@ -34,5 +51,6 @@ def get_info(url):
         "Genres": genres,
         "Theme": theme,
         "Studios": studios,
-        "Demographic": demographic
+        "Demographic": demographic,
+        "Alternative Title": alternative_title_text
     }
