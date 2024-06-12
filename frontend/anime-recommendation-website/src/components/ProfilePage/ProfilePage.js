@@ -86,7 +86,7 @@ const ProfilePage = () => {
               <button onClick={sortByScore} className={sortBy === 'score' ? 'active' : ''}>Sort by Score</button>
               <button onClick={sortByName} className={sortBy === 'name' ? 'active' : ''}>Sort by Name</button>
             </div>
-            <div className="search-bar">
+            <div className="search-bar2">
               <span>or</span>
               <input
                 type="text"

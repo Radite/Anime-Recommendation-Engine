@@ -169,12 +169,12 @@
     color: #000;
   }
   
-  .search-bar {
+  .search-bar2 {
     display: flex;
     align-items: center;
   }
   
-  .search-bar input {
+  .search-bar2 input {
     padding: 5px;
     margin-left: 10px;
   }

@@ -1,4 +1,3 @@
-// src/pages/AnimeListPage.js
 import React, { useState, useEffect } from 'react';
 import '../../styles/AnimeListPage.css'; // Import CSS file
 import Header from '../Header'; // Import the Header component
@@ -10,10 +9,13 @@ function AnimeListPage() {
   const [animeList, setAnimeList] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
   useEffect(() => {
     if (debouncedSearchTerm.trim() !== '') {
       fetchData();
+      setCurrentPage(1); // Reset pagination to page 1 when search term changes
     }
   }, [debouncedSearchTerm]);
 
@@ -26,16 +28,46 @@ function AnimeListPage() {
     }
   };
 
+  const calculateRelevanceScore = (anime, searchTerm) => {
+    // Calculate relevance score based on various factors like match in name, alternative name, etc.
+    let score = 0;
+    if (anime.Name.toLowerCase().includes(searchTerm.toLowerCase())) {
+      score += 3; // Higher weight for matching name
+    }
+    if (anime.Alternative && anime.Alternative.toLowerCase().includes(searchTerm.toLowerCase())) {
+      score += 2; // Moderate weight for matching alternative name
+    }
+    // Add more factors for relevance scoring if needed
+    return score;
+  };
+
   let filteredAnime = [];
   if (animeList) {
     filteredAnime = animeList.filter(
       (anime) =>
-        anime.Name.toLowerCase().startsWith(debouncedSearchTerm.toLowerCase()) ||
-        (anime.Alternative && anime.Alternative.toLowerCase().startsWith(debouncedSearchTerm.toLowerCase()))
+        anime.Name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) || // Use includes for substring matching
+        (anime.Alternative && anime.Alternative.toLowerCase().includes(debouncedSearchTerm.toLowerCase()))
     );
+
+    // Sort filtered anime based on relevance to search term
+    filteredAnime.sort((a, b) => {
+      const aScore = calculateRelevanceScore(a, debouncedSearchTerm);
+      const bScore = calculateRelevanceScore(b, debouncedSearchTerm);
+      return bScore - aScore;
+    });
   }
 
-  const displayedAnime = filteredAnime.slice(0, 3); // Display only the first 3 items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const displayedAnime = filteredAnime.slice(indexOfFirstItem, indexOfLastItem);
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
 
   return (
     <div>
@@ -50,7 +82,17 @@ function AnimeListPage() {
             setDebouncedSearchTerm={setDebouncedSearchTerm}
           />
           {debouncedSearchTerm.trim() !== '' && (
-            <AnimeList animeList={displayedAnime} />
+            <>
+              <AnimeList animeList={displayedAnime} />
+              <div className="pagination">
+                <button onClick={prevPage} disabled={currentPage === 1}>
+                  Previous
+                </button>
+                <button onClick={nextPage} disabled={indexOfLastItem >= filteredAnime.length}>
+                  Next
+                </button>
+              </div>
+            </>
           )}
         </div>
       </div>
