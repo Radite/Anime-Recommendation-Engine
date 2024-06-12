@@ -5,19 +5,18 @@ import SignUpPage from './components/SignUpPage/SignUpPage';
 import AnimeListPage from './components/AnimeListPage/AnimeListPage';
 import RecommendationPage from './components/RecommendationPage/RecommendationPage';
 import AnimePage from './components/AnimePage/AnimePage';
-import Header from './components/Header';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import PersonalRecommendationPage from './components/RecommendationPage/PersonalRecommendationPage';
 import './App.css';
 
 function App() {
-  // Function to check if JWT token exists
+  // Check if JWT token exists
   const isAuthenticated = () => {
     const token = localStorage.getItem('token');
     return token !== null;
   };
 
-  // Function to render protected routes or redirect to login if not authenticated
+  // Conditional rendering or redirect to login
   const ProtectedRoute = ({ element: Component, ...rest }) => {
     return isAuthenticated() ? <Component {...rest} /> : <Navigate to="/login" />;
   };
@@ -26,7 +25,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          {/* Set up default route for the root URL */}
+          {/* Default Route*/}
           <Route path="/" element={<Navigate to="/login" />} />
           {/* Routes accessible without authentication */}
           <Route path="/login" element={<LoginPage />} />

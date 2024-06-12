@@ -1,12 +1,10 @@
 import mysql.connector
 from mysql.connector import pooling
 import os
+from dotenv import load_dotenv
 
-# Directly set the environment variables
-os.environ["DB_HOST"] = "127.0.0.1"
-os.environ["DB_DATABASE"] = "anime_database"
-os.environ["DB_USERNAME"] = "root"
-os.environ["DB_PASSWORD"] = "aaaa"
+load_dotenv()
+
 
 # Print environment variables to debug
 print("DB_HOST:", os.getenv("DB_HOST"))

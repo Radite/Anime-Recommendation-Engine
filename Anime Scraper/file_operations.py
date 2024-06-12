@@ -17,10 +17,11 @@ def write_note_file(num, index):
         file.write(f"{num}\n")
         file.write(f"{index}\n")
 
-def check_excel_file():
+'''def check_excel_file():
     return os.path.exists("anime_info.xlsx")
 
 def create_excel_file():
     if not check_excel_file():
         anime_df = pd.DataFrame(columns=['Name', 'Score', 'Aired', 'Duration', 'Episodes', 'Rating', 'Genres', 'Theme', 'Studios', 'Demographic'])
         anime_df.to_excel("anime_info.xlsx", index=False)
+'''

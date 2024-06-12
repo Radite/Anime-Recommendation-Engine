@@ -56,29 +56,24 @@ function RecommendationPage() {
           
         />
 
-        <div className="anime-list">
-          {loading ? (
-            <div className="loading-placeholder">Loading...</div>
-          ) : (
-            <div className="anime-cards">
-              {generatedRecommendations && !suggestionClicked && !searchActive ? (
-                recommendedAnime.slice((currentPage - 1) * recommendationsPerPage, currentPage * recommendationsPerPage).map((anime, index) => (
-                  <AltAnimeCard key={index} anime={anime} />
-                ))
-              ) : (
-                recommendedAnime.slice((currentPage - 1) * recommendationsPerPage, currentPage * recommendationsPerPage).map((anime, index) => (
-                  <AnimeCard key={index} anime={anime} />
-                ))
-              )}
-            </div>
-          )}
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          recommendedAnime={recommendedAnime}
-          recommendationsPerPage={recommendationsPerPage}
-          paginate={setCurrentPage}
-        />
+<div className="anime-list">
+  {loading ? (
+    <div className="loading-placeholder">Loading...</div>
+  ) : (
+    <div className="anime-cards">
+      {recommendedAnime.slice((currentPage - 1) * recommendationsPerPage, currentPage * recommendationsPerPage).map((anime, index) => (
+        <AnimeCard key={index} anime={anime} />
+      ))}
+    </div>
+  )}
+</div>
+<Pagination
+  currentPage={currentPage}
+  recommendedAnime={recommendedAnime}
+  recommendationsPerPage={recommendationsPerPage}
+  paginate={setCurrentPage}
+/>
+
       </div>
     </div>
   );

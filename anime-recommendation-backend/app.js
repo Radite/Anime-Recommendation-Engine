@@ -31,6 +31,8 @@ app.use('/users', usersRouter);
 app.use('/api/auth', authRouter); // Use auth routes
 app.use('/anime', animeRouter); // Use anime routes
 app.use('/api/recommendation', recommendationRouter); // Use anime routes
+// Serve images from the 'images' directory
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

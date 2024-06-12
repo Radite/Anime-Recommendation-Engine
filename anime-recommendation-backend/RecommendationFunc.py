@@ -1,14 +1,8 @@
 import mysql.connector
 from surprise import SVDpp
 import pickle
+from db import get_connection
 
-def connect_to_database():
-    return mysql.connector.connect(
-        host='127.0.0.1',
-        database='anime_database',
-        user='root',
-        password='aaaa'
-    )
 
 def load_model(model_path):
     with open(model_path, 'rb') as f:
@@ -17,7 +11,7 @@ def load_model(model_path):
 # In ab.py
 def retrain_model():
     # Fetch all user ratings from the database
-    cnx = connect_to_database()
+    cnx = get_connection()
     cursor = cnx.cursor()
 
     cursor.execute("SELECT User_ID, Anime_ID, Rating FROM User_Anime")
@@ -49,7 +43,7 @@ def generate_top_recommendations(user_id, n=9):
     # Load the updated model
     svdpp = load_model('svdpp_model.pkl')
 
-    cnx = connect_to_database()
+    cnx = get_connection()
     cursor = cnx.cursor()
 
     # Fetch user ratings from the database
@@ -79,7 +73,7 @@ def generate_top_recommendations(user_id, n=9):
     return sorted_predictions[:n]
 
 def predict_user_rating(user_id, anime_id):
-    cnx = connect_to_database()
+    cnx = get_connection()
     cursor = cnx.cursor()
 
     # Fetch anime names
