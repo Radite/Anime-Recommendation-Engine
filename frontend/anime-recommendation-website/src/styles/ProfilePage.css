@@ -1,5 +1,3 @@
-/* ProfilePage.css */
-
 .profile-page {
     display: flex;
     flex-direction: column;
@@ -11,6 +9,7 @@
     background-position: center;
     position: relative;
     color: #fff; /* White text color */
+    overflow-y: hidden; /* Add vertical scrollbar when necessary */
 }
 
 .overlay {
@@ -35,58 +34,41 @@
     text-align: center;
 }
 
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Three cards per row */
+    gap: 20px; /* Gap between cards */
+}
+
 .anime-card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the card */
-    margin-bottom: 20px;
     padding: 20px;
     border-radius: 10px;
     transition: transform 0.3s ease; /* Smooth transition on hover */
-    text-align: left; /* Align text to the left */
-    padding-bottom: 70px;
-    padding-top:40px;
+    text-align: center; /* Align text to the center */
 }
 
 .anime-card:hover {
     transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-.anime-card h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.anime-card p {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.anime-card p:last-child {
-    margin-bottom: 0;
-}
-
 .anime-info {
-    flex: 1;
-    text-align: left; /* Ensure text is aligned to the left */
+    text-align: center; /* Ensure text is aligned to the center */
 }
 
 .anime-score {
     font-size: 24px;
     color: #ffcc00; /* Yellow color for the score */
-    margin-left: 20px;
+    margin-top: 20px;
 }
 
+/* Media query for smaller screens */
 @media (max-width: 768px) {
-    .anime-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .anime-score {
-        margin-left: 0;
-        margin-top: 10px;
+    .anime-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Two cards per row on smaller screens */
     }
 }
 
@@ -170,3 +152,30 @@
 .update-recommendation-button:hover {
     background-color: #ffd633;
 }
+
+.sort-search-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .sort-options button {
+    margin-right: 10px;
+  }
+  
+  .sort-options .active {
+    background-color: #ffcc00; /* Yellow color for active button */
+    color: #000;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input {
+    padding: 5px;
+    margin-left: 10px;
+  }
+  

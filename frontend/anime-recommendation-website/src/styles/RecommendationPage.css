@@ -173,3 +173,29 @@
   border-radius: 10px; /* Rounded corners for images */
   margin-bottom: 10px; /* Margin below image */
 }
+
+.sort-options {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.sort-options button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sort-options button:hover {
+  background-color: #555;
+}
+
+.sort-options button.active {
+  background-color: #ffcc00;
+  color: #000;
+}
