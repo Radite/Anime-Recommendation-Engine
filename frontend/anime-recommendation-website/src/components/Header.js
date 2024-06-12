@@ -31,11 +31,15 @@ function Header() {
     <header>
       <nav>
         <ul>
-          <li>
-            <Link to="/recommendation">Content Recommendations </Link>
-          </li>
-          <li>
-            <Link to="/personalrecommendation">Personal Recommendations </Link>
+          <li className="dropdown">
+            <span className="dropdown-toggle">
+              Recommendation
+              <span className="dropdown-arrow">&#9660;</span>
+            </span>
+            <div className="dropdown-content">
+              <Link to="/recommendation">Content Recommendations</Link>
+              <Link to="/personalrecommendation">Personal Recommendations</Link>
+            </div>
           </li>
           <li>
             <Link to="/anime-list">Anime Search</Link>

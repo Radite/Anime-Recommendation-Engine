@@ -3,7 +3,7 @@ import axios from 'axios';
 const handleSubmit = async (e, formData, setErrorMessage, navigate) => {
   e.preventDefault();
   try {
-    const response = await axios.post('http://localhost:3001/api/auth/login', formData);
+    const response = await axios.post('http://192.168.100.67:3001/api/auth/login', formData);
     localStorage.setItem('token', response.data.token);
     setErrorMessage('');
     navigate('/recommendation');

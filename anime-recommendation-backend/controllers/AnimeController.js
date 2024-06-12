@@ -30,7 +30,11 @@ exports.getAnimeById = async (req, res) => {
             }
 
             const anime = results[0];
-            const imageUrl = `/images/${encodeURIComponent(anime.Name)}.jpg`; // Adjust the path based on your image storage
+            // Encode the anime name for URL
+            const encodedName = encodeURIComponent(anime.Name);
+            // Replace "%3A" with a space in the encoded name
+            const cleanedName = encodedName.replace(/%3A/g, '');
+            const imageUrl = `/images/${cleanedName}.jpg`; // Adjust the path based on your image storage
             anime.imageUrl = imageUrl;
             res.status(200).json(anime);
         });
@@ -53,9 +57,13 @@ exports.getAllAnimeNames = async (req, res) => {
                 return;
             }
 
-            // Add local image path to each result based on Name
+            // Replace "%3A" with a space in each anime name
             const updatedResults = results.map(anime => {
-                const imageUrl = `/images/${encodeURIComponent(anime.Name)}.jpg`;
+                // Encode the anime name for URL
+                const encodedName = encodeURIComponent(anime.Name);
+                // Replace "%3A" with a space in the encoded name
+                const cleanedName = encodedName.replace(/%3A/g, '');
+                const imageUrl = `/images/${cleanedName}.jpg`;
                 anime.imageUrl = imageUrl;
                 return anime;
             });

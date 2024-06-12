@@ -1,16 +1,41 @@
 // src/utils/animeFunctions.js
 const handleSearch = (e, animeList, setSearchTerm, setSuggestedAnime) => {
-    setSearchTerm(e.target.value);
-    let filteredAnime = [];
-    if (animeList) {
-      filteredAnime = animeList.filter(
-        (anime) =>
-          anime.Name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-          (anime.Alternative && anime.Alternative.toLowerCase().includes(e.target.value.toLowerCase()))
+  const searchTerm = e.target.value.toLowerCase();
+  setSearchTerm(searchTerm);
+  
+  let filteredAnime = [];
+  if (animeList) {
+      filteredAnime = animeList.filter(anime =>
+          anime.Name.toLowerCase().includes(searchTerm) ||
+          (anime.Alternative && anime.Alternative.toLowerCase().includes(searchTerm))
       );
-    }
-    setSuggestedAnime(filteredAnime.slice(0, 5));
-  };
+
+      // Sort the filtered anime based on how closely they match the search term
+      filteredAnime.sort((a, b) => {
+          const aIndex = a.Name.toLowerCase().indexOf(searchTerm);
+          const bIndex = b.Name.toLowerCase().indexOf(searchTerm);
+
+          // Check for exact matches
+          if (a.Name.toLowerCase() === searchTerm && b.Name.toLowerCase() !== searchTerm) {
+              return -1;
+          } else if (b.Name.toLowerCase() === searchTerm && a.Name.toLowerCase() !== searchTerm) {
+              return 1;
+          }
+
+          // Prioritize matches where the search term is at the beginning of the name
+          if (aIndex === 0 && bIndex !== 0) {
+              return -1;
+          } else if (bIndex === 0 && aIndex !== 0) {
+              return 1;
+          } else {
+              return aIndex - bIndex;
+          }
+      });
+  }
+
+  setSuggestedAnime(filteredAnime.slice(0, 8));
+};
+
   
   const handleRecommendation = async (animeId, setLoading, setRecommendedAnime, setCurrentPage) => {
     setLoading(true);

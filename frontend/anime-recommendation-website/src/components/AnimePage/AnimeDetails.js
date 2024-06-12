@@ -3,6 +3,8 @@ import React from 'react';
 function AnimeDetails({ animeInfo, handleRateAnime }) {
   const baseUrl = 'http://192.168.100.67:3001';
   const imageUrl = animeInfo.imageUrl ? `${baseUrl}${animeInfo.imageUrl}` : null;
+  console.log(baseUrl); // Log the base URL to the console
+  console.log(imageUrl); // Log the base URL to the console
 
   return (
     <div className="anime-info-content">
@@ -10,7 +12,7 @@ function AnimeDetails({ animeInfo, handleRateAnime }) {
         <div className="flex-container">
           {imageUrl ? (
             <div className="image-container">
-              <img src={imageUrl} alt={animeInfo.Name} onError={(e) => { e.target.onerror = null; e.target.src = `${baseUrl}/default_image.jpg` }} />
+              <img src={imageUrl} alt={animeInfo.Name} onError={(e) => { e.target.onerror = null; e.target.src = `${baseUrl}/images/placeholder.png` }} />
             </div>
           ) : (
             <div className="image-container">

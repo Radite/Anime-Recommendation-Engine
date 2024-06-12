@@ -37,22 +37,27 @@ function PersonalRecommendationPage() {
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.userId;
       const response = await axios.get(`http://127.0.0.1:5000/recommendations/${userId}`);
-      
+  
       const recommendations = await Promise.all(response.data.map(async (recommendation) => {
         const animeId = recommendation[0];
+        const animeName = recommendation[1];
+        const predictedRating = Math.round(recommendation[2]);
         try {
-          const alternativeResponse = await axios.get(`http://192.168.100.67:3001/anime/${animeId}`);
-          const alternative = alternativeResponse.data.Alternative;
-          const animeName = alternative ? alternative : recommendation[1];
+          const animeResponse = await axios.get(`http://192.168.100.67:3001/anime/${animeId}`);
+          const imageUrl = animeResponse.data.imageUrl;
           return {
+            animeId,
             animeName,
-            predictedRating: Math.round(recommendation[2])
+            predictedRating,
+            imageUrl // Include imageUrl in the recommendation object
           };
         } catch (error) {
-          console.error('Error fetching alternative anime:', error);
+          console.error('Error fetching anime details:', error);
           return {
-            animeName: recommendation[1],
-            predictedRating: Math.round(recommendation[2])
+            animeId,
+            animeName,
+            predictedRating,
+            imageUrl: null // If fetching image fails, set imageUrl to null
           };
         }
       }));
@@ -88,7 +93,15 @@ function PersonalRecommendationPage() {
         <button onClick={handleGenerateRecommendations} className="generate-recommendations-btn" disabled={isModelRetraining}>
           {isModelRetraining ? 'Updating Model' : 'Generate Personal Recommendations'}
         </button>
-
+  
+        <button
+          className="update-recommendation-button"
+          onClick={handleUpdateRecommendation}
+          disabled={isModelRetraining}
+        >
+          {isModelRetraining ? 'Updating Recommendation...' : 'Update Recommendation'}
+        </button>
+  
         {loadingRecommendations ? (
           <div className="loading-placeholder">Loading Recommendations...</div>
         ) : recommendedAnime.length > 0 ? (
@@ -100,19 +113,11 @@ function PersonalRecommendationPage() {
             </div>
           </div>
         ) : null}
-
+  
         {/* Pagination component can be included here if needed */}
-
-        <button
-          className="update-recommendation-button"
-          onClick={handleUpdateRecommendation}
-          disabled={isModelRetraining} // Disable the button while model retraining is in progress
-        >
-          {isModelRetraining ? 'Updating Recommendation...' : 'Update Recommendation'}
-        </button>
       </div>
     </div>
   );
-}
+  }
 
 export default PersonalRecommendationPage;
