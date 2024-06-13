@@ -7,7 +7,7 @@
     background-color: transparent;
     position: relative;
     padding: 50px;
-    margin-top: -140vh; /* Offset to overlay on search-bar-container */
+    margin-top: -145vh; /* Offset to overlay on search-bar-container */
     z-index: 1; /* Ensure recommendation container is above search bar */
   }
 
@@ -49,9 +49,7 @@
   transform: translateX(-50%); /* Center horizontally */
 }
 
-.update-recommendation-button {
-  top: calc(50px); /* 10px below the header */
-}
+
 
 .generate-recommendations-btn:hover,
 .update-recommendation-button:hover {
