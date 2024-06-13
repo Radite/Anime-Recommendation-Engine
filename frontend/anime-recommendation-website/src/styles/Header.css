@@ -1,9 +1,23 @@
 /* Header styles */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333; /* Dark background color */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100; /* Ensure a higher z-index */
+  border-radius: 5px;
+}
+
+/* Ensure header has a position and appropriate z-index */
 header {
   background-color: #000; /* Dark background color */
   padding: 20px 0; /* Increased padding for better spacing */
   text-align: center;
+  position: relative; /* Ensure header has a position */
+  z-index: 10; /* Ensure a reasonable z-index value */
 }
+
 
 nav {
   display: flex;
