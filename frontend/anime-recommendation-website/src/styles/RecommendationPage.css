@@ -39,7 +39,6 @@
   justify-content: center;
   align-items:self-start;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for container */
-  margin-bottom: 20px; /* Margin bottom for spacing */
   border-radius: 5px; /* Rounded corners */
   height: 150vh; /* Match recommendation-container height */
   background-image: url('../assets/4k-sci-fi-black-hole-wallpaper.avif'); /* Background image */

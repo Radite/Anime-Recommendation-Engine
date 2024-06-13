@@ -38,7 +38,7 @@ def retrain_model():
     with open('svdpp_model.pkl', 'wb') as f:
         pickle.dump(model, f)
 
-def generate_top_recommendations(user_id, n=9):
+def generate_top_recommendations(user_id, n=6):
 
     # Load the updated model
     svdpp = load_model('svdpp_model.pkl')

@@ -8,19 +8,26 @@ import { jwtDecode } from 'jwt-decode';
 
 function PersonalRecommendationPage() {
   const [recommendedAnime, setRecommendedAnime] = useState([]);
-  const [loadingRecommendations, setLoadingRecommendations] = useState(false);
+  const [loadingRecommendations, setLoadingRecommendations] = useState(true); // Initially set as true to load recommendations on mount
   const [isModelRetraining, setIsModelRetraining] = useState(true); // Initially set as true
 
   useEffect(() => {
     checkModelStatus(); // Check model status immediately upon component mount
     const intervalId = setInterval(() => {
       checkModelStatus(); // Check model status every 5 seconds
-    }, 2000);
+    }, 5000); // Adjusted interval to 5 seconds as per your requirement
   
     // Clean up the interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
-  
+
+  useEffect(() => {
+    if (!isModelRetraining) {
+      // Model retraining is complete, fetch recommendations
+      fetchRecommendations();
+    }
+  }, [isModelRetraining]);
+
   const checkModelStatus = async () => {
     try {
       const response = await axios.get('http://127.0.0.1:5000/model/status');
@@ -30,7 +37,8 @@ function PersonalRecommendationPage() {
       console.error('Error checking model status:', error);
     }
   };
-  const handleGenerateRecommendations = async () => {
+
+  const fetchRecommendations = async () => {
     try {
       setLoadingRecommendations(true);
       const token = localStorage.getItem('token');
@@ -63,6 +71,7 @@ function PersonalRecommendationPage() {
       }));
   
       setRecommendedAnime(recommendations);
+      setLoadingRecommendations(false);
       console.log('Personal Recommendations:', recommendations);
     } catch (error) {
       console.error('Error generating recommendations:', error);
@@ -89,11 +98,10 @@ function PersonalRecommendationPage() {
   return (
     <div>
       <Header />
-      <div className="personal-recommendation-container">
-        <button onClick={handleGenerateRecommendations} className="generate-recommendations-btn" disabled={isModelRetraining}>
-          {isModelRetraining ? 'Updating Model' : 'Generate Personal Recommendations'}
-        </button>
-  
+
+      <div className="button-container">
+        <div className="overlay"></div>
+
         <button
           className="update-recommendation-button"
           onClick={handleUpdateRecommendation}
@@ -101,7 +109,9 @@ function PersonalRecommendationPage() {
         >
           {isModelRetraining ? 'Updating Recommendation...' : 'Update Recommendation'}
         </button>
-  
+      </div>
+
+      <div className="personal-recommendation-container">
         {loadingRecommendations ? (
           <div className="loading-placeholder">Loading Recommendations...</div>
         ) : recommendedAnime.length > 0 ? (
@@ -113,11 +123,9 @@ function PersonalRecommendationPage() {
             </div>
           </div>
         ) : null}
-  
-        {/* Pagination component can be included here if needed */}
       </div>
     </div>
   );
-  }
+}
 
 export default PersonalRecommendationPage;
