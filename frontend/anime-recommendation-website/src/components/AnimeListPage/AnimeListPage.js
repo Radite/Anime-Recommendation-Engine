@@ -72,15 +72,15 @@ function AnimeListPage() {
   return (
     <div>
       <Header />
+      <div className="search-bar-container"> {/* New div for search bar */}
+            <SearchBar
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              setDebouncedSearchTerm={setDebouncedSearchTerm}
+            />
+          </div>
       <div className="anime-list-container">
-        <div className="overlay"></div>
         <div className="anime-list-content">
-          <h2>Anime Search</h2>
-          <SearchBar
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            setDebouncedSearchTerm={setDebouncedSearchTerm}
-          />
           {debouncedSearchTerm.trim() !== '' && (
             <>
               <AnimeList animeList={displayedAnime} />
