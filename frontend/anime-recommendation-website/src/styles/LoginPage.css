@@ -20,6 +20,7 @@
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.7); /* Dark background with some transparency */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    height: 220px;
   }
   
   .login-form label {
@@ -35,7 +36,7 @@
     background-color: rgba(255, 255, 255, 0.8); /* Light background color with some transparency */
   }
   
-  .button-container {
+  .button-container2 {
     display: flex;
     justify-content: space-between;
   }

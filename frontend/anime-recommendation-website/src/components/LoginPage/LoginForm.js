@@ -28,7 +28,7 @@ function LoginForm({ navigate }) {
       <label htmlFor="password">Password:</label>
       <input type="password" id="password" name="password" value={formData.password} onChange={onInputChange} required />
 
-      <div className="button-container">
+      <div className="button-container2">
         <button type="submit" className="login-button">Login</button>
         <Link to="/signup" className="signup-button">Sign Up</Link>
       </div>

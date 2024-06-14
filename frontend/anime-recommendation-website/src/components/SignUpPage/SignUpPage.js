@@ -47,7 +47,7 @@ function SignUpPage() {
           <option value="female">Female</option>
         </select>
 
-        <div className="button-container">
+        <div className="button-container2">
           <button type="submit" className="signup-button">Sign Up</button>
           <button type="button" className="login-button" onClick={goToLoginPage}>Go to Login</button>
         </div>

@@ -14,12 +14,13 @@
 .signup-form {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 250px;
   padding: 20px;
   border: 2px solid #fff; /* White border */
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.7); /* Dark background with some transparency */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  height: 500px;
 }
 
 .signup-form label {
@@ -48,4 +49,8 @@
 
 .signup-button:hover {
   background-color: #3f3fff; /* Darker shade on hover */
+}
+.button-container2 {
+  display: flex;
+  justify-content: space-between;
 }
